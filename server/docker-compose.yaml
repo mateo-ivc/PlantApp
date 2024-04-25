@@ -1,0 +1,20 @@
+version: "3.1"
+services:
+  postgres:
+    container_name: postgres
+    image: postgres
+    ports:
+      - "5432:5432"
+    env_file:
+      - "./database.env"
+    restart: unless-stopped
+    networks:
+      plant_app:
+        ipv4_address: 172.25.0.2
+networks:
+  plant_app:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.25.0.0/16
+          gateway: 172.25.0.1

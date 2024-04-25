@@ -1,7 +1,8 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
   <div id="nav">
-    <router-link to="{name: '/plants'}">Plant</router-link>
+
+    <router-link to="/plants">Plant</router-link>
   </div>
   <router-view/>
 </template>

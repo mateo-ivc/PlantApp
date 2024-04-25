@@ -12,7 +12,7 @@ type Database struct {
 }
 
 const (
-	host     = "185.202.239.207"
+	host     = "localhost"
 	port     = 5342
 	user     = "mateo"
 	password = "Mateo2002"

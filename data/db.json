@@ -1,7 +1,19 @@
 {
   "plants": [
-    {"id": "5f77bab8-0e13-4740-a432-665393c2cefa", "name":  "sweety pie", "type": "Monstera"},
-    {"id": "5f77bab8-0e13-4740-a432-665393c2cefb", "name":  "ralf", "type": "Monstera"},
-    {"id": "5f77bab8-0e13-4740-a432-665393c2cefc", "name":  "yokel", "type": "Monstera"}
+    {
+      "id": "1",
+      "name": "jesus",
+      "type": "Monstera"
+    },
+    {
+      "id": "2",
+      "name": "ralf",
+      "type": "Monstera"
+    },
+    {
+      "id": "3",
+      "name": "yokel",
+      "type": "Monstera"
+    }
   ]
 }
