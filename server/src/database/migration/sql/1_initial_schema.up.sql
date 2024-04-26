@@ -1,0 +1,6 @@
+CREATE TABLE plants
+(
+    id         SERIAL PRIMARY KEY,
+    name       VARCHAR(64) NOT NULL,
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+);
