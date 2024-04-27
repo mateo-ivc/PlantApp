@@ -4,6 +4,7 @@ import (
 	"PlantApp/api"
 	"PlantApp/database"
 	"PlantApp/logger"
+	"PlantApp/services/plants"
 	"log"
 
 	"net/http"
@@ -17,9 +18,10 @@ func main() {
 	}
 }
 func run() error {
-	_ = database.New()
-	s := api.New()
+	dbConnection := database.New()
+	boardService := plants.NewPlantService(dbConnection)
+	s := api.New(boardService)
 	port := ":8080"
-	//logger.Get().Infow("starting server", "base-path", basePath, "port", port)
+	logger.Get().Infow("starting server", "port", port)
 	return http.ListenAndServe(port, s)
 }

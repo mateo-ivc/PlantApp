@@ -2,13 +2,17 @@ package dto
 
 import (
 	"PlantApp/database"
-	"github.com/google/uuid"
+	"time"
 )
 
 type Plant struct {
-	ID   uuid.UUID `json:"id"`
-	Name string    `json:"name"`
-	Type string    `json:"type,omitempty"`
+	ID           int         `json:"id"`
+	Name         string      `json:"name"`
+	Moisture     int         `json:"moisture"`
+	Humidity     int         `json:"humidity"`
+	Lighting     int         `json:"lighting"`
+	CreatedAt    time.Time   `json:"created_at"`
+	ControllerID interface{} `json:"controllerID"`
 }
 type CreatePlantRequest struct {
 	Name string `json:"name"`
@@ -18,9 +22,13 @@ type PlantUpdateRequest struct {
 	Name string `json:"name"`
 }
 
-func (b *Plant) From(plant database.Plant) *Plant {
-	b.ID = plant.ID
-	b.Name = plant.Name
-	b.Type = plant.Type
-	return b
+func (p *Plant) From(plant database.Plant) *Plant {
+	p.ID = plant.ID
+	p.Name = plant.Name
+	p.Moisture = plant.Moisture
+	p.Humidity = plant.Humidity
+	p.Lighting = plant.Lighting
+	p.CreatedAt = plant.CreatedAt
+	p.ControllerID = plant.ControllerID
+	return p
 }

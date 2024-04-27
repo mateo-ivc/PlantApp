@@ -1,18 +1,29 @@
-<template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <div id="nav">
-
-    <router-link to="/plants">Plant</router-link>
+<template xmlns:div="http://www.w3.org/1999/html">
+  <Sidebar/>
+  <div :style="{'margin-left': sidebarWidth}">
+    <router-view/> <!-- Display all routes -->
   </div>
-  <router-view/>
+<!--  <div id="nav">-->
+
+<!--    <router-link to="/plants">Plant</router-link>-->
+<!--  </div>-->
+
 </template>
 
 <script>
 
 
+import Sidebar from "@/components/sidebar/SidebarComponent.vue";
+import {sidebarWidth} from "@/components/sidebar/state";
+
 export default {
   name: 'App',
-  components: {}
+  computed: {
+    sidebarWidth() {
+      return sidebarWidth
+    }
+  },
+  components: {Sidebar}
 }
 </script>
 
