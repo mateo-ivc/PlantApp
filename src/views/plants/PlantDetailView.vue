@@ -1,6 +1,6 @@
 <template>
   <h1>PlantDetailView</h1>
-  <p>Plantname: {{ plant.name }}</p>
+  <p>Plant name: {{ plant.name }}</p>
 </template>
 
 <script>
@@ -8,7 +8,6 @@
 
 export default {
   data() {
-
     return {
       plant: {}
     }

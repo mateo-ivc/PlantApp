@@ -6,7 +6,7 @@ import {collapsed} from "@/components/sidebar/state";
 export default {
   props: {
     to: {type: String, required: true},
-    icon: {type: String, required: true}
+    svg: {type: Object, required: true}
 
   },
   setup(props) {
@@ -19,11 +19,11 @@ export default {
 
 <template>
   <router-link :to="to" class="link" :class="{active: isActive}">
-    <i class="icon" :class="icon"/>
+    <component :is="svg" />
     <transition name="fade">
-  <span v-if="!collapsed">
-    <slot/>
-  </span>
+    <span v-if="!collapsed">
+      <slot/>
+    </span>
     </transition>
   </router-link>
 </template>

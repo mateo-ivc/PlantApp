@@ -1,14 +1,27 @@
 <script>
 import {collapsed, toggleSidebar, sidebarWidth} from "@/components/sidebar/state";
-import DoubleAngleBack from "@/components/icons/double-angle-back.vue";
 import SidebarLinksComponent from "@/components/sidebar/SidebarLinksComponent.vue";
-
-
-
-
+import DoubleAngleBack from "@/components/icons/DoubleAngleBack.vue"
+import HomeIcon from "@/components/icons/HomeIcon.vue";
+import PlantIcon from "@/components/icons/PlantIcon.vue";
+import DashboardIcon from "@/components/icons/DashboardIcon.vue";
 
 export default {
-  components: {SidebarLinksComponent, DoubleAngleBack},
+  computed: {
+    DashboardIcon() {
+      return DashboardIcon
+    },
+    PlantIcon() {
+      return PlantIcon
+    },
+    HomeIcon() {
+      return HomeIcon
+    },
+    DoubleAngleBack() {
+      return DoubleAngleBack
+    }
+  },
+  components: {DoubleAngleBack, SidebarLinksComponent},
   props: {},
   setup() {
     return {collapsed, toggleSidebar, sidebarWidth}
@@ -29,9 +42,8 @@ export default {
       </span>
     </h1>
 
-    <SidebarLinksComponent to="/" icon="fas fa-home">Home</SidebarLinksComponent>
-    <SidebarLinksComponent to="/plants" icon="fas fa-home">Plants</SidebarLinksComponent>
-    <SidebarLinksComponent to="/dashboard" icon="fas fa-home">Dashboard</SidebarLinksComponent>
+    <SidebarLinksComponent to="/" :svg=HomeIcon>Home</SidebarLinksComponent>
+    <SidebarLinksComponent to="/dashboard" :svg=DashboardIcon>Dashboard</SidebarLinksComponent>
     <span class="collapse-icon"  :class="{'rotate-180': collapsed}" @click="toggleSidebar">
     <double-angle-back/>
     </span>
@@ -52,7 +64,7 @@ export default {
   background-color: var(--sidebar-bg-color);
 
   float: left;
-  position: fixed;
+
   z-index: 1;
   top: 0;
   left: 0;
@@ -63,6 +75,7 @@ export default {
 
   display: flex;
   flex-direction: column;
+  height: -webkit-fill-available;
 }
 .collapse-icon{
   position: absolute;
