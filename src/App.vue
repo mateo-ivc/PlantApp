@@ -1,5 +1,5 @@
 <template xmlns:div="http://www.w3.org/1999/html">
-  <Sidebar/>
+<!--  <Sidebar/>-->
   <div id="main">
 
 
@@ -11,17 +11,10 @@
 <script>
 
 
-import Sidebar from "@/components/sidebar/SidebarComponent.vue";
-import {sidebarWidth} from "@/components/sidebar/state";
+
 
 export default {
   name: 'App',
-  computed: {
-    sidebarWidth() {
-      return sidebarWidth
-    }
-  },
-  components: {Sidebar}
 }
 </script>
 

@@ -2,7 +2,8 @@
   <div class="plants-container">
     <div v-for="plant in plants" :key="plant.name" class="plant">
       <div class="plant-image-container">
-        <img src="https://placehold.co/600x400" width="100%" height="300px" style="object-fit: cover" alt=""/>
+        <!-- Click event is removed from the image -->
+        <img :src="plant.imageUrl" :id="'plant-image-'+ plant.id" width="100%" height="300px" style="object-fit: cover" alt=""/>
       </div>
       <div class="plant-text-container">
         <div>
@@ -28,19 +29,43 @@
     </div>
   </div>
 </template>
+
 <script>
-
-
 export default {
   data() {
     return {
       plants: []
     }
-  }, mounted() {
-    fetch('http://localhost:8080/plants').then((res) => res.json()).then(data => this.plants = data).catch(err => console.log(err.message))
+  },
+  mounted() {
+    // Fetch plants data
+    fetch('http://localhost:8080/plants')
+        .then(res => res.json())
+        .then(data => {
+          // Set plants data
+          this.plants = data;
+          // Fetch images for each plant
+          this.plants.forEach(plant => this.fetchImage(plant.id));
+        })
+        .catch(err => console.error(err));
+  },
+  methods: {
+    fetchImage(id) {
+      fetch(`http://localhost:8080/plants/${id}/image`, {
+        method: 'GET'
+      })
+          .then(response => response.text())
+          .then(base64Img => {
+            // Update the imageUrl property of the corresponding plant
+            const plant = this.plants.find(p => p.id === id);
+            if (plant) {
+              plant.imageUrl = `data:image/png;base64,${base64Img}`;
+            }
+          })
+          .catch(error => console.error('Error:', error));
+    }
   }
 }
-
 </script>
 
 <style>
@@ -53,14 +78,11 @@ export default {
 }
 
 .plants-container > div {
-
   box-shadow: 0 0 1px 1px gray;
   margin-bottom: 10px;
 }
 
-.plant {
-
-}
+.plant {}
 
 .plant-image-container {
   max-width: 300px;
@@ -70,14 +92,13 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: start;
-
 }
 
-.plant-text-container{
+.plant-text-container {
   padding: 10px
 }
 
-.plant-information-data{
+.plant-information-data {
   display: flex;
   justify-content: space-between;
   width: 80%;
