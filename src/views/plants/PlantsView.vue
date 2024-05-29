@@ -70,23 +70,21 @@ export default {
 
 <style>
 .plants-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 10px 10px 0 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
   gap: 2%;
+
 }
+
 
 .plants-container > div {
   box-shadow: 0 0 1px 1px gray;
   margin-bottom: 10px;
+  width: 100%; /* Ensures the box takes up the full grid cell width */
+  min-width: 275px;
+
 }
 
-.plant {}
-
-.plant-image-container {
-  max-width: 300px;
-}
 
 .plant-information-container {
   display: flex;

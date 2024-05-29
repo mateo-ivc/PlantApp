@@ -1,13 +1,16 @@
 <script>
-import {collapsed, toggleSidebar, sidebarWidth} from "@/components/sidebar/state";
-import SidebarLinksComponent from "@/components/sidebar/SidebarLinksComponent.vue";
 import DoubleAngleBack from "@/components/icons/DoubleAngleBack.vue"
 import HomeIcon from "@/components/icons/HomeIcon.vue";
 import PlantIcon from "@/components/icons/PlantIcon.vue";
 import DashboardIcon from "@/components/icons/DashboardIcon.vue";
+import SidebarLinksComponent from "@/components/sidebar/SidebarLinksComponent.vue";
+import AccountIcon from "@/components/icons/AccountIcon.vue";
 
 export default {
   computed: {
+    AccountIcon() {
+      return AccountIcon
+    },
     DashboardIcon() {
       return DashboardIcon
     },
@@ -21,32 +24,26 @@ export default {
       return DoubleAngleBack
     }
   },
-  components: {DoubleAngleBack, SidebarLinksComponent},
+  components: {SidebarLinksComponent},
   props: {},
-  setup() {
-    return {collapsed, toggleSidebar, sidebarWidth}
-  }
+
 }
 </script>
 
 <template>
-  <div class="sidebar" :style="{width: sidebarWidth}">
+  <div class="sidebar">
 
-    <h1>
-      <span v-if="collapsed">
-        <div>V</div>
-        <div>S</div>
-      </span>
-      <span v-else>
-        Vue Sidebar
-      </span>
-    </h1>
+    <div class="nav-item" id="logo">
+      <a> Home</a>
 
-    <SidebarLinksComponent to="/" :svg=HomeIcon>Home</SidebarLinksComponent>
-    <SidebarLinksComponent to="/dashboard" :svg=DashboardIcon>Dashboard</SidebarLinksComponent>
-    <span class="collapse-icon"  :class="{'rotate-180': collapsed}" @click="toggleSidebar">
-    <double-angle-back/>
-    </span>
+    </div>
+    <div class="nav-item">
+
+    </div>
+    <div class="nav-item" id="icons">
+      <SidebarLinksComponent to="/dashboard" :svg=DashboardIcon>Dashboard</SidebarLinksComponent>
+      <SidebarLinksComponent to="/account" :svg="AccountIcon">Account</SidebarLinksComponent>
+    </div>
   </div>
 </template>
 
@@ -60,35 +57,35 @@ export default {
 
 <style scoped>
 .sidebar {
-  color: white;
-  background-color: var(--sidebar-bg-color);
-
-  float: left;
-
-  z-index: 1;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  padding: 0.5em;
-
-  transition: 0.3s ease;
-
   display: flex;
-  flex-direction: column;
-  height: -webkit-fill-available;
-}
-.collapse-icon{
-  position: absolute;
-  bottom: 0;
-  padding: 0.75em;
+  gap: 2%;
+  font-size: 2rem;
 
-  color: rgba(255,255,255, 0.7);
-
-  transition: 0.2s linear;
 }
 
-.rotate-180{
-  transform: rotate(180deg);
-  transition: 0.2s linear;
+.nav-item {
+  margin-bottom: 10px;
+  width: 100%; /* Ensures the box takes up the full grid cell width */
+
 }
+#icons {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  gap: 10px;
+
+}
+
+#icons > * {
+  width: 30px;
+  height: 30px;
+  align-self: center;
+
+}
+
+#logo {
+  text-align: left;
+}
+
+
 </style>
