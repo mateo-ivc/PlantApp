@@ -2,15 +2,17 @@
 
 export default {
   props: {
-    svg: {type: Object, required: true}
+    svg: {type: Object, required: true},
+    to: {type: String, required: true}
   },
 
 }
 </script>
 <template>
 
-  <component :is="svg" />
-
+  <a :href="to">
+  <component  :is="svg" />
+  </a>
 </template>
 
 <style scoped>

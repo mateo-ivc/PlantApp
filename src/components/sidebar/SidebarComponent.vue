@@ -64,8 +64,8 @@ export default {
 }
 
 .nav-item {
-  margin-bottom: 10px;
-  width: 100%; /* Ensures the box takes up the full grid cell width */
+  margin: 10px 0;
+  width: 100%;
 
 }
 #icons {

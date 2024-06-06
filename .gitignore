@@ -21,4 +21,5 @@ yarn-error.log*
 *.sw*
 
 # static files
-/server/src/static/images/*
+/server/src/.air.toml
+/server/src/tmp

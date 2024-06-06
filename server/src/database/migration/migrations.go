@@ -44,9 +44,8 @@ func Open() (*sql.DB, error) {
 	err = m.Up()
 	if err == nil || errors.Is(err, migrate.ErrNoChange) {
 		return db, nil
-
 	}
 
-	logger.Get().Errorw(" Migration dirty", "error", err)
+	logger.Get().Errorw("Migration dirty", "error", err)
 	return nil, err
 }

@@ -8,6 +8,7 @@ import (
 type Plant struct {
 	ID           int
 	Name         string
+	Temperature  int
 	Moisture     int
 	Humidity     int
 	Lighting     int
@@ -18,7 +19,7 @@ type Plant struct {
 func (d *Database) GetPlant(plantID int) (Plant, error) {
 	var plant Plant
 	if err := d.db.QueryRow(fmt.Sprintf("SELECT * FROM Plants p where p.id = %d", plantID)).
-		Scan(&plant.ID, &plant.Name, &plant.Moisture, &plant.Humidity, &plant.Lighting, &plant.CreatedAt, &plant.ControllerID); err != nil {
+		Scan(&plant.ID, &plant.Name, &plant.Temperature, &plant.Moisture, &plant.Humidity, &plant.Lighting, &plant.CreatedAt, &plant.ControllerID); err != nil {
 		return Plant{}, err
 	}
 	return plant, nil
@@ -35,7 +36,8 @@ func (d *Database) GetOverview() ([]Plant, error) {
 	for rows.Next() {
 		var plant Plant
 		// Scan the values from the row into the struct fields
-		err := rows.Scan(&plant.ID, &plant.Name, &plant.Moisture, &plant.Humidity, &plant.Lighting, &plant.CreatedAt, &plant.ControllerID)
+		err := rows.Scan(&plant.ID, &plant.Name, &plant.Temperature, &plant.Moisture, &plant.Humidity, &plant.Lighting, &plant.CreatedAt, &plant.ControllerID)
+		fmt.Println(plant.Temperature)
 		if err != nil {
 			panic(err)
 		}

@@ -8,6 +8,7 @@ import (
 type Plant struct {
 	ID           int         `json:"id"`
 	Name         string      `json:"name"`
+	Temperature  int         `json:"temperature"`
 	Moisture     int         `json:"moisture"`
 	Humidity     int         `json:"humidity"`
 	Lighting     int         `json:"lighting"`
@@ -25,6 +26,7 @@ type PlantUpdateRequest struct {
 func (p *Plant) From(plant database.Plant) *Plant {
 	p.ID = plant.ID
 	p.Name = plant.Name
+	p.Temperature = plant.Temperature
 	p.Moisture = plant.Moisture
 	p.Humidity = plant.Humidity
 	p.Lighting = plant.Lighting
