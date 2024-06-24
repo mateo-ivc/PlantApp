@@ -46,9 +46,21 @@ func (s *PlantService) GetOverview(ctx context.Context) ([]*dto.Plant, error) {
 	return plantOverview, nil
 }
 
-func (s *PlantService) Update(ctx context.Context, body dto.PlantUpdateRequest) (*dto.Plant, error) {
+func (s *PlantService) UpdatePlant(ctx context.Context, body dto.PlantUpdateRequest) (*dto.Plant, error) {
 	//TODO implement me
-	panic("implement me")
+	update := database.PlantUpdate{
+		ID:          body.ID,
+		Name:        body.Name,
+		Temperature: body.Temperature,
+		Moisture:    body.Moisture,
+		Humidity:    body.Humidity,
+		Lighting:    body.Lighting,
+	}
+	plant, err := s.database.UpdatePlant(update)
+	if err != nil {
+		return nil, err
+	}
+	return new(dto.Plant).From(plant), err
 }
 
 func (s *PlantService) Delete(ctx context.Context, id uuid.UUID) error {

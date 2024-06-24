@@ -20,7 +20,12 @@ type CreatePlantRequest struct {
 }
 
 type PlantUpdateRequest struct {
-	Name string `json:"name"`
+	ID          int    `json:"id"`
+	Name        string `json:"name"`
+	Temperature int    `json:"temperature"`
+	Moisture    int    `json:"moisture"`
+	Humidity    int    `json:"humidity"`
+	Lighting    int    `json:"lighting"`
 }
 
 func (p *Plant) From(plant database.Plant) *Plant {

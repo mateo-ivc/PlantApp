@@ -36,6 +36,7 @@ func (s *Server) publicRoutes(r chi.Router) chi.Router {
 	return r.Group(func(r chi.Router) {
 		r.Get("/plants", s.getPlants)
 		r.Get("/plants/{id}", s.getPlant)
+		r.Post("/plants/{id}", s.updatePlant)
 		r.Get("/plants/{id}/image", s.servePlantImage)
 		r.Post("/plants/{id}/image", s.uploadPlantImage)
 	})

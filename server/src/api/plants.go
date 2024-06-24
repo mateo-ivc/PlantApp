@@ -1,6 +1,7 @@
 package api
 
 import (
+	"PlantApp/common/dto"
 	"PlantApp/logger"
 	"encoding/base64"
 	"fmt"
@@ -27,6 +28,8 @@ func (s *Server) getPlant(w http.ResponseWriter, r *http.Request) {
 	plant, err := s.plants.Get(r.Context(), plantID)
 	if err != nil {
 		logger.Get().Errorw("Failed to fetch plant", "plantID", plantID, "error", err)
+		render.Status(r, http.StatusInternalServerError)
+		return
 	}
 
 	render.Status(r, http.StatusOK)
@@ -70,4 +73,22 @@ func (s *Server) servePlantImage(w http.ResponseWriter, r *http.Request) {
 	// Write the base64 encoded image data to the response
 	w.Header().Set("Content-Type", "text/plain") // Set the appropriate content type
 	w.Write([]byte(base64Img))
+}
+
+func (s *Server) updatePlant(w http.ResponseWriter, r *http.Request) {
+	plantID, _ := strconv.Atoi(chi.URLParam(r, "id"))
+	var body dto.PlantUpdateRequest
+	if err := render.Decode(r, &body); err != nil {
+		logger.Get().Errorw("Failed to parse body", "error", err)
+	}
+
+	body.ID = plantID
+	plant, err := s.plants.UpdatePlant(r.Context(), body)
+	if err != nil {
+		logger.Get().Errorw("Failed to fetch plant", "error", err, "plantID", plantID)
+		render.Status(r, http.StatusInternalServerError)
+		return
+	}
+	render.Status(r, http.StatusOK)
+	render.Respond(w, r, plant)
 }
